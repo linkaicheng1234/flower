@@ -69,11 +69,47 @@ void MainWindow::createUI()
     hLayout->addWidget(cbSelectAll);
 
     //订单界面，自己做成QWidget基类
-    CarGo* OrderMenu = new CarGo() ;
+    CarGo* order1 = new CarGo() ;
+    order1->setName("one");
+    order1->setPic(":/images/common/LoGo.jpg");
+    QList<QString> list;
+    list<<"blue"<<"red"<<"yellow";
+    order1->setSelect(QStringList(list));
+
+    CarGo* order2 = new CarGo() ;
+    order2->setName("two");
+    order2->setPic(":/images/common/LoGo.jpg");
+    order2->setSelect(QStringList(list));
+
+    CarGo* order3 = new CarGo() ;
+    order3->setName("three");
+    order3->setPic(":/images/common/LoGo.jpg");
+    order3->setSelect(QStringList(list));
+
+    CarGo* order4 = new CarGo() ;
+    order4->setName("four");
+    order4->setPic(":/images/common/LoGo.jpg");
+    order4->setSelect(QStringList(list));
+
+    CarGo* order5 = new CarGo() ;
+    order5->setName("four");
+    order5->setPic(":/images/common/LoGo.jpg");
+    order5->setSelect(QStringList(list));
+
+    QGridLayout* rightgLayout = new QGridLayout;
+    rightgLayout->addWidget(order1,0,0,1,1);
+    rightgLayout->addWidget(order2,0,1,1,1);
+    rightgLayout->addWidget(order3,0,2,1,1);
+    rightgLayout->addWidget(order4,1,1,2,1);
+    rightgLayout->addWidget(order5,2,0,1,1);
+
+    QWidget* rightWidget = new QWidget;
+    rightWidget->setLayout(rightgLayout);
 
     QVBoxLayout* rightLayout = new QVBoxLayout;
     rightLayout->addLayout(hLayout);
-    rightLayout->addWidget(OrderMenu);
+    rightLayout->addWidget(rightWidget);
+
 
     rightFrame = new QFrame;
     rightFrame->setSizePolicy(QSizePolicy::Expanding,QSizePolicy::Minimum);

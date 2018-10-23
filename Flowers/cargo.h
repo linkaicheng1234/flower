@@ -5,16 +5,22 @@
 #include <QComboBox>
 #include <QSpinBox>
 #include <QLabel>
-class CarGo: public QWidget
+class CarGo: public QFrame
 {
     Q_OBJECT
 public:
-    CarGo(QWidget *parent = 0);
+    CarGo(QFrame *parent = 0);
+    void setName(QString name);
+    void setSelect(QStringList list);
+    void setPic(QString picPath);
+    QString name();
+
 private:
     QLabel* labelPic;
     QLabel* labelName;
     QSpinBox* sbNumber;
     QComboBox* cbselect;
+
 
 };
 

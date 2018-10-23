@@ -2,18 +2,33 @@
 #include <QDebug>
 #include <QVBoxLayout>
 #include <QHBoxLayout>
-CarGo::CarGo(QWidget *parent):QWidget(parent)
+CarGo::CarGo(QFrame *parent):QFrame(parent)
 {
+
+    this->resize(50,50);
+    this->setMaximumSize(150,150);
+
+    //不能设置边框颜色
+    //this->setFrameShape(QFrame::Box);
+
+    //setStyleSheet这种边框设置父控件会影响子控件
+    //this->setStyleSheet ("background-image:url(:/images/common/border.png);");
+
+    //边框设置
+    this->setAutoFillBackground(true);
+    QPalette palette;
+    palette.setBrush(this->backgroundRole(),QBrush(QPixmap(":/images/common/border.png")));
+    this->setPalette(palette);
+
+    this->show();
 
     labelPic = new QLabel;
     labelName = new QLabel;
     sbNumber = new QSpinBox;
     cbselect = new QComboBox;
 
-    QPixmap pixmap(":/images/common/LoGo.jpg");
-    QPixmap fitpixmap=pixmap.scaled(186, 46, Qt::IgnoreAspectRatio, Qt::SmoothTransformation);
-    labelPic->setPixmap(fitpixmap);
-
+    labelPic->setSizePolicy(QSizePolicy::Expanding,QSizePolicy::Expanding);
+    labelName->setAlignment(Qt::AlignHCenter);
 
     QHBoxLayout* HLayout = new QHBoxLayout;
     HLayout->addWidget(sbNumber);
@@ -25,8 +40,28 @@ CarGo::CarGo(QWidget *parent):QWidget(parent)
     VLayout->addLayout(HLayout);
     this->setLayout(VLayout);
 
-    this->resize(50,50);
-    this->setMaximumSize(150,150);
-    this->show();
+}
+
+void CarGo::setName(QString name)
+{
+    labelName->setText(name);
+}
+
+void CarGo::setSelect(QStringList list)
+{
+    cbselect->addItems(list);
+}
+
+void CarGo::setPic(QString picPath)
+{
+    QPixmap pixmap(picPath);
+    QPixmap fitpixmap=pixmap.scaled(186, 46, Qt::IgnoreAspectRatio, Qt::SmoothTransformation);
+    labelPic->setPixmap(fitpixmap);
+
+}
+
+QString CarGo::name()
+{
+    return labelName->text();
 }
 
