@@ -3,6 +3,12 @@
 #include <QHBoxLayout>
 #include <QSpacerItem>
 #include <QCheckBox>
+#include <QAxObject>
+#include <QDebug>
+#include <QStandardPaths>
+#include <QFileDialog>
+#include <QCoreApplication>
+
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent)
 {
@@ -68,39 +74,31 @@ void MainWindow::createUI()
     QHBoxLayout* hLayout = new QHBoxLayout;
     hLayout->addWidget(cbSelectAll);
 
+
     //订单界面，自己做成QWidget基类
-    CarGo* order1 = new CarGo() ;
-    order1->setName("one");
-    order1->setPic(":/images/common/LoGo.jpg");
     QList<QString> list;
     list<<"blue"<<"red"<<"yellow";
-    order1->setSelect(QStringList(list));
+    CarGo* order1 = new CarGo() ;
+    order1->initParams("first",QStringList(list),":/images/common/LoGo.jpg");
 
     CarGo* order2 = new CarGo() ;
-    order2->setName("two");
-    order2->setPic(":/images/common/LoGo.jpg");
-    order2->setSelect(QStringList(list));
+    order2->initParams("two",QStringList(list),":/images/common/LoGo.jpg");
 
     CarGo* order3 = new CarGo() ;
-    order3->setName("three");
-    order3->setPic(":/images/common/LoGo.jpg");
-    order3->setSelect(QStringList(list));
+    order3->initParams("three",QStringList(list),":/images/common/LoGo.jpg");
 
     CarGo* order4 = new CarGo() ;
-    order4->setName("four");
-    order4->setPic(":/images/common/LoGo.jpg");
-    order4->setSelect(QStringList(list));
+    order4->initParams("four",QStringList(list),":/images/common/LoGo.jpg");
 
-    CarGo* order5 = new CarGo() ;
-    order5->setName("four");
-    order5->setPic(":/images/common/LoGo.jpg");
-    order5->setSelect(QStringList(list));
+    CarGo* order5 = new CarGo();
+    order5->initParams("five",QStringList(list),":/images/common/LoGo.jpg");
+
 
     QGridLayout* rightgLayout = new QGridLayout;
     rightgLayout->addWidget(order1,0,0,1,1);
     rightgLayout->addWidget(order2,0,1,1,1);
     rightgLayout->addWidget(order3,0,2,1,1);
-    rightgLayout->addWidget(order4,1,1,2,1);
+    rightgLayout->addWidget(order4,1,2,1,1);
     rightgLayout->addWidget(order5,2,0,1,1);
 
     QWidget* rightWidget = new QWidget;
@@ -130,4 +128,15 @@ void MainWindow::createUI()
     mainVBoxLayout->setContentsMargins(0, 0, 0, 0);
     mainVBoxLayout->setSpacing(2);
     this->setLayout(mainVBoxLayout);
+
+    //获取execl表格
+    QString applicationDirPathStr = QCoreApplication::applicationDirPath();
+    qDebug()<< "applicationDirPathStr:" << applicationDirPathStr;
+
+    QString excel_file_path = applicationDirPathStr + "/1.xlsx";
+    qDebug()<<"excel_file_path"<<excel_file_path;
+    ExecList *exc = new ExecList;
+    exc->openExec(excel_file_path);
+    exc->showData();
+    exc->closeExec();
 }

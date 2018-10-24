@@ -6,6 +6,7 @@
 #include <QToolBox>
 #include <QPushButton>
 #include "cargo.h"
+#include "execlist.h"
 namespace Ui {
 class MainWindow;
 }

@@ -65,3 +65,17 @@ QString CarGo::name()
     return labelName->text();
 }
 
+void CarGo::initParams(QString name, QStringList list, QString picPath)
+{
+
+    labelName->setText(name);
+    cbselect->addItems(list);
+    if(picPath.isNull())
+        return ;
+    QPixmap pixmap(picPath);
+    QPixmap fitpixmap=pixmap.scaled(186, 46, Qt::IgnoreAspectRatio, Qt::SmoothTransformation);
+    labelPic->setPixmap(fitpixmap);
+
+
+}
+

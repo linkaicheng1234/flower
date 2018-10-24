@@ -14,6 +14,7 @@ public:
     void setSelect(QStringList list);
     void setPic(QString picPath);
     QString name();
+    void initParams(QString name,QStringList list,QString picPath = NULL);
 
 private:
     QLabel* labelPic;
