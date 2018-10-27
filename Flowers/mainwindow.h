@@ -5,6 +5,8 @@
 #include <QLabel>
 #include <QToolBox>
 #include <QPushButton>
+#include <QStackedWidget>
+#include "widgetitem.h"
 #include "cargo.h"
 #include "execlist.h"
 namespace Ui {
@@ -30,7 +32,7 @@ private:
     QPushButton* pbNewOrder;
     QPushButton* pbFinishOrder;
     QPushButton* pbAllOrder;
-
+    WidgetItem* cetWidget;
 
 };
 

@@ -5,8 +5,8 @@
 CarGo::CarGo(QFrame *parent):QFrame(parent)
 {
 
-    this->resize(50,50);
-    this->setMaximumSize(150,150);
+    this->resize(120,120);
+    this->setMaximumSize(120,120);
 
     //不能设置边框颜色
     //this->setFrameShape(QFrame::Box);
