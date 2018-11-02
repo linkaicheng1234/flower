@@ -2,5 +2,6 @@
     <qresource prefix="/">
         <file>images/common/LoGo.jpg</file>
         <file>images/common/TopBG.jpg</file>
+        <file>images/common/border.png</file>
     </qresource>
 </RCC>

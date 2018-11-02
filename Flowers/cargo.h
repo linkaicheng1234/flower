@@ -14,8 +14,17 @@ public:
     void setSelect(QStringList list);
     void setPic(QString picPath);
     QString name();
+    QStringList colors();
+    QString color();
+    int number();
     void initParams(QString name,QStringList list,QString picPath = NULL);
+    bool hasNumber;
+signals:
+    void numberChange();
 
+private slots:
+    void ChangeValue(int number);
+    void Changecolor(QString Color);
 private:
     QLabel* labelPic;
     QLabel* labelName;

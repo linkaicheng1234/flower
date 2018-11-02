@@ -4,6 +4,7 @@
 #include <QHBoxLayout>
 #include <QMapIterator>
 #include "menuitem.h"
+#include "ordermanage.h"
 #include <QDebug>
 WidgetItem::WidgetItem(QWidget *parent) : QWidget(parent)
 {
@@ -36,8 +37,8 @@ WidgetItem::WidgetItem(QWidget *parent) : QWidget(parent)
     connect(btGroup,SIGNAL(buttonClicked(int)),this,SLOT(btGroupClick(int)));
 
     //right
-    QStackedWidget* rightStackWidget = new QStackedWidget;
-    rightStackWidget->setFrameShape(QFrame::Box);
+    rightStackWidget = new QStackedWidget;
+    rightStackWidget->setFrameStyle(QFrame::Box | QFrame::Raised);
     rightStackWidget->resize(900,520);
     rightStackWidget->setMaximumSize(900,520);
     QHBoxLayout* hLayout = new QHBoxLayout;
@@ -64,24 +65,41 @@ void WidgetItem::btGroupClick(int ids)
     QToolButton *pToolbt = qobject_cast<QToolButton*>(btGroup->button(ids));
     QString btObjectName = pToolbt->objectName();
     int index = WidgetOpenInStackwidget(btObjectName);
-
+    if(index >= 0)
+    {
+        rightStackWidget->setCurrentIndex(index);
+        return ;
+    }
     if(btObjectName.compare("new order") == 0)
     {
-        qDebug()<<index;
-        if(index > 0)
-            rightStackWidget->setCurrentIndex(index);
-        else
-        {
-            QLabel* widgetItem = new QLabel;
-            if(widgetItem){
-                qDebug()<<"pp";
-               rightStackWidget->addWidget(widgetItem);
-               qDebug()<<"pp1";
-//               rightStackWidget->setCurrentWidget(widgetItem);
-//               objectMap.insert(btObjectName,rightStackWidget->currentIndex());
-           }
+        MenuItem* widgetItem = new MenuItem();
+        if(widgetItem){
+           rightStackWidget->addWidget(widgetItem);
+           rightStackWidget->setCurrentWidget(widgetItem);
+           objectMap.insert(btObjectName,rightStackWidget->currentIndex());
         }
     }
+
+    if(btObjectName.compare("finish order") == 0)
+    {
+        OrderManage* orderManage = new OrderManage();
+        if(orderManage){
+           rightStackWidget->addWidget(orderManage);
+           rightStackWidget->setCurrentWidget(orderManage);
+           objectMap.insert(btObjectName,rightStackWidget->currentIndex());
+        }
+    }
+
+    if(btObjectName.compare("all order") == 0)
+    {
+        OrderManage* orderManage = new OrderManage();
+        if(orderManage){
+           rightStackWidget->addWidget(orderManage);
+           rightStackWidget->setCurrentWidget(orderManage);
+           objectMap.insert(btObjectName,rightStackWidget->currentIndex());
+        }
+    }
+
 }
 //    for(int i=1;i<btGroup->buttons().count()+1;++i){
 //        QToolButton *pToolbt = qobject_cast<QToolButton*>(btGroup->button(i));

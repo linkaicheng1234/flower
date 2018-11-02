@@ -90,6 +90,10 @@ void ExecList::showData()
     }
 }
 
+QList<QList<QVariant>> ExecList::getList()
+{
+    return execList;
+}
 
 void ExecList::castVariant2ListListVariant(const QVariant &var)
 {

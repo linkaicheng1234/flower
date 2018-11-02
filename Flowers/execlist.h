@@ -2,8 +2,9 @@
 #define EXECLIST_H
 
 #include <QObject>
-#include <QAxObject>
 #include <QAxBase>
+#include <QAxObject>
+
 class ExecList
 {
 public:
@@ -15,7 +16,7 @@ public:
     void writeData(int row,int column,QVariant data);//,QList<QList<QVariant>> list = NULL);
     void getrowcol(int& row,int& col);
     void showData();
-
+    QList<QList<QVariant>> getList();
     //void findData(QVariant data);
     void castVariant2ListListVariant(const QVariant &var);
 

@@ -72,16 +72,5 @@ void MainWindow::createUI()
     mainVBoxLayout->setSpacing(2);
     m_pCenterWidget->setLayout(mainVBoxLayout);
 
-    //获取execl表格
-//    QString applicationDirPathStr = QCoreApplication::applicationDirPath();
 
-//    QString excel_file_path = applicationDirPathStr + "/1.xlsx";
-//    qDebug()<<"excel_file_path"<<excel_file_path;
-//    if(QFile(excel_file_path).exists())
-//    {
-//        ExecList *exc = new ExecList;
-//        exc->openExec(excel_file_path);
-//        exc->showData();
-//        exc->closeExec();
-//    }
 }

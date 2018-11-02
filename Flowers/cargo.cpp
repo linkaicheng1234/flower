@@ -5,8 +5,8 @@
 CarGo::CarGo(QFrame *parent):QFrame(parent)
 {
 
-    this->resize(120,120);
-    this->setMaximumSize(120,120);
+    this->resize(150,150);
+    this->setMaximumSize(150,150);
 
     //不能设置边框颜色
     //this->setFrameShape(QFrame::Box);
@@ -19,8 +19,6 @@ CarGo::CarGo(QFrame *parent):QFrame(parent)
     QPalette palette;
     palette.setBrush(this->backgroundRole(),QBrush(QPixmap(":/images/common/border.png")));
     this->setPalette(palette);
-
-    this->show();
 
     labelPic = new QLabel;
     labelName = new QLabel;
@@ -39,6 +37,10 @@ CarGo::CarGo(QFrame *parent):QFrame(parent)
     VLayout->addWidget(labelName);
     VLayout->addLayout(HLayout);
     this->setLayout(VLayout);
+
+    hasNumber = false;
+    connect(sbNumber,SIGNAL(valueChanged(int)),this,SLOT(ChangeValue(int)));
+    connect(cbselect,SIGNAL(currentTextChanged(QString)),this,SLOT(Changecolor(QString)));
 
 }
 
@@ -65,6 +67,24 @@ QString CarGo::name()
     return labelName->text();
 }
 
+QStringList CarGo::colors()
+{
+    QStringList list;
+    for(int i = 0;i<cbselect->count();i++)
+        list<<cbselect->itemText(i);
+    return list;
+}
+
+QString CarGo::color()
+{
+    return cbselect->currentText();
+}
+
+int CarGo::number()
+{
+    return sbNumber->text().toInt();
+}
+
 void CarGo::initParams(QString name, QStringList list, QString picPath)
 {
 
@@ -76,6 +96,19 @@ void CarGo::initParams(QString name, QStringList list, QString picPath)
     QPixmap fitpixmap=pixmap.scaled(186, 46, Qt::IgnoreAspectRatio, Qt::SmoothTransformation);
     labelPic->setPixmap(fitpixmap);
 
+}
+
+void CarGo::ChangeValue(int number)
+{
+    if(number)
+        hasNumber = true;
+    else
+        hasNumber = false;
+    emit numberChange();
+}
+
+void CarGo::Changecolor(QString Color)
+{
 
 }
 
