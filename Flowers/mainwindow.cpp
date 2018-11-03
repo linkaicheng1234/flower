@@ -10,6 +10,8 @@
 #include <QCoreApplication>
 #include <QFile>
 #include <QWidget>
+#include <QtSql>
+#include "clientmes.h"
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent)
 {
@@ -73,4 +75,29 @@ void MainWindow::createUI()
     m_pCenterWidget->setLayout(mainVBoxLayout);
 
 
+
+    ClientMes* mes = new ClientMes;
+    mes->openDb("client.db");
+    mes->query->exec("create table automobil(id int, name varchar)");//,cargo varchar,color varchar,num int)");
+    //插入记录
+    for(int i = 0; i < 10; i++)
+    {
+//        mes->query->prepare("INSERT INTO ordmes(id, cargo,color,num)VALUES (:id, :cargo,:color,:num)");
+//        mes->query->bindValue(":id", i);
+//        mes->query->bindValue(":cargo", "furong");
+//        mes->query->bindValue(":color", "blue");
+//        mes->query->prepare("INSERT INTO ordmes (id,num)VALUES (:id,:num)");
+//        mes->query->bindValue(":id", i);
+//        mes->query->bindValue(":num", 10);
+        mes->query->prepare("INSERT INTO automobil (id, name) "
+                              "VALUES (:id, :name)");
+        mes->query->bindValue(":id", i);
+        mes->query->bindValue(":name", "furong");
+        if(!mes->query->exec())
+        {
+            QSqlError lastError = mes->query->lastError();
+            qDebug() << lastError.driverText() << QString(QObject::tr("INSERT failed."));
+        }
+    }
+    mes->closeDb();
 }

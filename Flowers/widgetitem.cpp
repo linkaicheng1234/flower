@@ -38,7 +38,7 @@ WidgetItem::WidgetItem(QWidget *parent) : QWidget(parent)
 
     //right
     rightStackWidget = new QStackedWidget;
-    rightStackWidget->setFrameStyle(QFrame::Box | QFrame::Raised);
+	rightStackWidget->setFrameStyle(QFrame::Box | QFrame::Raised);
     rightStackWidget->resize(900,520);
     rightStackWidget->setMaximumSize(900,520);
     QHBoxLayout* hLayout = new QHBoxLayout;
@@ -72,11 +72,17 @@ void WidgetItem::btGroupClick(int ids)
     }
     if(btObjectName.compare("new order") == 0)
     {
-        MenuItem* widgetItem = new MenuItem();
-        if(widgetItem){
-           rightStackWidget->addWidget(widgetItem);
-           rightStackWidget->setCurrentWidget(widgetItem);
-           objectMap.insert(btObjectName,rightStackWidget->currentIndex());
+        qDebug()<<index;
+        if(index > 0)
+            rightStackWidget->setCurrentIndex(index);
+        else
+        {
+            QLabel* widgetItem = new QLabel;
+            if(widgetItem){
+               rightStackWidget->addWidget(widgetItem);
+//               rightStackWidget->setCurrentWidget(widgetItem);
+//               objectMap.insert(btObjectName,rightStackWidget->currentIndex());
+           }
         }
     }
 

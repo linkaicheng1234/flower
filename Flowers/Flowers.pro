@@ -4,8 +4,10 @@
 #
 #-------------------------------------------------
 
-QT       += core gui widgets axcontainer
-#CONFIG  += qaxcontainer
+
+#CONFIG+=qaxcontainer
+QT       +=  core gui sql widgets axcontainer
+
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
 TARGET = Flowers
@@ -22,6 +24,7 @@ SOURCES += main.cpp\
     widgetitem.cpp \
     widgetitems/menuitem.cpp \
     widgetitems/ordermanage.cpp
+    clientmes.cpp
 
 INCLUDEPATH += widgetitems/
 
@@ -31,7 +34,9 @@ HEADERS  += mainwindow.h \
     widgetitem.h \
     widgetitems/menuitem.h \
     widgetitems/ordermanage.h
+    clientmes.h
 
 RESOURCES += \
     image.qrc
+
 
