@@ -103,6 +103,7 @@ void MenuItem::initMenu()
     connect(pbCanel,SIGNAL(clicked()),this,SLOT(clickedCanel()));
 }
 
+//更新列表信息
 void MenuItem::mergeMes(QString name, int num, QString color)
 {
     QTableWidgetItem* item;
@@ -125,12 +126,15 @@ void MenuItem::mergeMes(QString name, int num, QString color)
     int row = tableMes->rowCount();
     tableMes->insertRow(row);
     item = new QTableWidgetItem(name);
+    item->setFlags(item->flags() & (~Qt::ItemIsEditable));
     item->setTextAlignment(Qt::AlignHCenter|Qt::AlignVCenter);
     tableMes->setItem(row,0,item);
     item = new QTableWidgetItem(color);
+    item->setFlags(item->flags() & (~Qt::ItemIsEditable));
     item->setTextAlignment(Qt::AlignHCenter|Qt::AlignVCenter);
     tableMes->setItem(row,1,item);
     item = new QTableWidgetItem(QString::number(num,10));
+    item->setFlags(item->flags() & (~Qt::ItemIsEditable));
     item->setTextAlignment(Qt::AlignHCenter|Qt::AlignVCenter);
     tableMes->setItem(row,2,item);
 }
